@@ -1,161 +1,38 @@
-//setTool("rectangle");
-makeRectangle(261, 339, 498, 492);
-run("Duplicate...", " ");
+function findROIByName(roiName) { 
+	nR = roiManager("Count"); 
+ 
+	for (i=0; i<nR; i++) { 
+		roiManager("Select", i); 
+		rName = Roi.getName(); 
+		if (matches(rName, roiName)) { 
+			return i; 
+		} 
+	} 
+	return -1; 
+}
+
+function saveResults() { 
+	filePath = getDirectory("current");
+	imageTitle = getTitle();
+	getDateAndTime(year, month, week, day, hour, min, sec, msec);
+	
+	fileName = "/Results_" + imageTitle + "_" + day+month+year+"_"+hour+min+sec;
+	saveAs(fileName, filePath + fileName + ".csv");
+}
+
+totROIs = roiManager("count"); // Inclusive of Probe
+
+// Thresholding
+run("8-bit");
 setAutoThreshold("Default");
-//run("Threshold...");
-setOption("BlackBackground", true);
-run("Convert to Mask");
-//setThreshold(255, 255);
-run("Convert to Mask");
-run("Analyze Particles...", "display clear summarize add");
-roiManager("Select", 0);
-roiManager("Select", 1);
-roiManager("Select", 2);
-roiManager("Select", 3);
-roiManager("Select", 4);
-roiManager("Select", 5);
-roiManager("Select", 6);
-roiManager("Select", 7);
-roiManager("Select", 8);
-roiManager("Select", 9);
-roiManager("Select", 10);
-roiManager("Select", 11);
-roiManager("Select", 12);
-roiManager("Select", 13);
-roiManager("Select", 14);
-roiManager("Select", 15);
-roiManager("Select", 16);
-roiManager("Select", 15);
-roiManager("Select", 14);
-roiManager("Select", 15);
-roiManager("Select", 16);
-roiManager("Select", 17);
-roiManager("Select", 18);
-roiManager("Select", 17);
-roiManager("Select", 16);
-roiManager("Select", 17);
-roiManager("Select", 18);
-roiManager("Select", 19);
-roiManager("Select", 20);
-roiManager("Select", 21);
-roiManager("Select", 22);
-roiManager("Select", 23);
-roiManager("Select", 24);
-roiManager("Select", 25);
-roiManager("Select", 26);
-roiManager("Select", 27);
-roiManager("Select", 28);
-roiManager("Select", 29);
-roiManager("Select", 30);
-roiManager("Select", 31);
-roiManager("Select", 32);
-roiManager("Select", 33);
-roiManager("Select", 34);
-roiManager("Select", 35);
-roiManager("Select", 36);
-roiManager("Select", 37);
-roiManager("Select", 38);
-roiManager("Select", 39);
-roiManager("Select", 40);
-roiManager("Select", 41);
-roiManager("Select", 42);
-roiManager("Select", 43);
-roiManager("Select", 44);
-roiManager("Select", 45);
-roiManager("Select", 46);
-roiManager("Select", 47);
-roiManager("Select", 48);
-roiManager("Select", 49);
-roiManager("Select", 50);
-roiManager("Select", 51);
-roiManager("Select", 52);
-roiManager("Select", 53);
-roiManager("Select", 54);
-roiManager("Select", 55);
-roiManager("Select", 56);
-roiManager("Select", 57);
-roiManager("Select", 58);
-roiManager("Select", 59);
-roiManager("Select", 60);
-roiManager("Select", 61);
-roiManager("Select", 62);
-roiManager("Select", 63);
-roiManager("Select", 64);
-roiManager("Select", 65);
-roiManager("Select", 66);
-roiManager("Select", 67);
-roiManager("Select", 68);
-roiManager("Select", 69);
-roiManager("Select", 70);
-roiManager("Select", 71);
-roiManager("Select", 72);
-roiManager("Select", 73);
-roiManager("Select", 74);
-roiManager("Select", 75);
-roiManager("Select", 76);
-roiManager("Select", 77);
-roiManager("Select", 78);
-roiManager("Select", 79);
-roiManager("Select", 80);
-roiManager("Select", 81);
-roiManager("Select", 82);
-roiManager("Select", 83);
-roiManager("Select", 84);
-roiManager("Select", 85);
-roiManager("Select", 86);
-roiManager("Select", 87);
-roiManager("Select", 88);
-roiManager("Select", 89);
-roiManager("Select", 90);
-roiManager("Select", 91);
-roiManager("Select", 92);
-roiManager("Select", 93);
-roiManager("Select", 94);
-roiManager("Select", 95);
-roiManager("Select", 96);
-roiManager("Select", 97);
-roiManager("Select", 98);
-roiManager("Select", 99);
-roiManager("Select", 100);
-roiManager("Select", 99);
-roiManager("Select", 98);
-roiManager("Select", 99);
-roiManager("Select", 100);
-roiManager("Select", 101);
-roiManager("Select", 102);
-roiManager("Select", 103);
-roiManager("Select", 104);
-roiManager("Select", 105);
-roiManager("Select", 106);
-roiManager("Select", 107);
-roiManager("Select", 108);
-roiManager("Select", 109);
-roiManager("Select", 110);
-roiManager("Select", 111);
-roiManager("Select", 112);
-roiManager("Select", 113);
-roiManager("Select", 114);
-roiManager("Select", 115);
-roiManager("Select", 116);
-roiManager("Select", 117);
-roiManager("Select", 118);
-roiManager("Select", 119);
-roiManager("Select", 120);
-roiManager("Select", 121);
-roiManager("Select", 122);
-roiManager("Select", 123);
-roiManager("Select", 124);
-roiManager("Select", 125);
-roiManager("Select", 126);
-roiManager("Select", 127);
-roiManager("Select", 128);
-roiManager("Select", 129);
-roiManager("Select", 130);
-roiManager("Select", 131);
-roiManager("Select", 132);
-roiManager("Select", 133);
-roiManager("Select", 134);
-roiManager("Select", 135);
-roiManager("Select", 136);
-roiManager("Select", 137);
-roiManager("Select", 138);
+
+for (i=1; i<totROIs; i++) {
+	currentSelection = findROIByName("^(roi_"+i+").+");
+	roiManager("select", currentSelection);
+	// Background Subtraction
+	// Normalization
+	// Count Cells
+	run("Analyze Particles...", "size=0-Infinity circularity=0.00-1.00 clear summarize");
+}
+
+saveResults()

@@ -85,4 +85,4 @@ for (i=0; i<totROIs; i++) {
 
 // Show the result
 Overlay.show();
-run("Save");
+//run("Save");

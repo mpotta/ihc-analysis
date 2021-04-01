@@ -11,6 +11,15 @@ function findROIByName(roiName) {
 	return -1; 
 }
 
+function saveResults() { 
+	filePath = getDirectory("current");
+	imageTitle = getTitle();
+	getDateAndTime(year, month, week, day, hour, min, sec, msec);
+	
+	fileName = "/Results_" + imageTitle + "_" + day+month+year+"_"+hour+min+sec;
+	saveAs(fileName, filePath + fileName + ".csv");
+}
+
 totROIs = roiManager("count"); // Inclusive of Probe
 
 // Set Measurements
@@ -22,5 +31,8 @@ for (i=1; i<totROIs; i++) {
 	// Background Subtraction
 	// Thresholding
 	// Normalization
+	// Measure
 	roiManager("Measure");
 }
+
+saveResults();
