@@ -17,7 +17,7 @@ function saveResults() {
 	getDateAndTime(year, month, week, day, hour, min, sec, msec);
 	
 	fileName = "/Results_" + imageTitle + "_" + day+month+year+"_"+hour+min+sec;
-	saveAs(fileName, filePath + fileName + ".csv");
+	saveAs("Results", filePath + fileName + ".csv");
 }
 
 totROIs = roiManager("count"); // Inclusive of Probe
@@ -36,3 +36,4 @@ for (i=1; i<totROIs; i++) {
 }
 
 saveResults();
+close("*")
