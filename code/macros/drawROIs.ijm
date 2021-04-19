@@ -15,7 +15,10 @@ function findROIByName(roiName) {
 	return -1; 
 }
 
+// Load Overlay
 run("Show Overlay");
+
+// Move Probe and Background ROIs from Overlay into ROI Manager
 run("To ROI Manager");
 
 // Retrieve Probe

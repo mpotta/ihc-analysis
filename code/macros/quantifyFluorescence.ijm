@@ -14,20 +14,31 @@ function findROIByName(roiName) {
 function saveResults() { 
 	filePath = getDirectory("current");
 	imageTitle = getTitle();
+	index = imageTitle.indexOf(".");
+	prefix = substring(imageTitle, 0, index);
 	getDateAndTime(year, month, week, day, hour, min, sec, msec);
 	
-	fileName = "/Results_" + imageTitle + "_" + day+month+year+"_"+hour+min+sec;
+	fileName = "/Results_" + prefix + "_" + day+month+year+"_"+hour+min+sec;
 	saveAs("Results", filePath + fileName + ".csv");
 }
 
-//run("Show Overlay");
-//run("To ROI Manager");
-totROIs = roiManager("count"); // Inclusive of Probe
+// Load Overlay
+run("Show Overlay");
+
+// Move ROIs from Overlay into ROI Manager
+run("To ROI Manager");
+
+totROIs = roiManager("count"); // Inclusive of Probe & Background
 
 // Set Measurements
 run("Set Measurements...", "area mean standard display redirect=None decimal=3");
 
-for (i=1; i<totROIs; i++) {
+currentSelection = findROIByName("^(roi_background)");
+roiManager("select", currentSelection);
+roiManager("Measure");
+roiManager("Deselect");
+
+for (i=1; i<totROIs-1; i++) {
 	// Select current ROI
 	currentSelection = findROIByName("^(roi_"+i+").+");
 	roiManager("select", currentSelection);
@@ -38,6 +49,9 @@ for (i=1; i<totROIs; i++) {
 	
 	// Add ROI Measurement to Results
 	roiManager("Measure");
+
+	// Deselect current selection
+	roiManager("Deselect");
 }
 
-//saveResults();
+saveResults();
