@@ -32,8 +32,7 @@ for (i=1; i<totROIs; i++) {
 	// Background Subtraction
 	// Normalization
 	// Count Cells
-	run("Analyze Particles...", "size=0-Infinity circularity=0.00-1.00 clear summarize");
+	run("Analyze Particles...", "size=40-3000 clear summarize");
 }
 
-saveResults()
-close("*")
+//saveResults()
