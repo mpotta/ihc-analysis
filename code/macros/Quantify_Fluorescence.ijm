@@ -26,7 +26,7 @@ function saveResults() {
 run("Show Overlay");
 
 // Move ROIs from Overlay into ROI Manager
-run("To ROI Manager");
+//run("To ROI Manager");
 
 totROIs = roiManager("count"); // Inclusive of Probe & Background
 
@@ -54,4 +54,4 @@ for (i=1; i<totROIs-1; i++) {
 	roiManager("Deselect");
 }
 
-saveResults();
+//saveResults();

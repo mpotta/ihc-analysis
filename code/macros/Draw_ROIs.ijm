@@ -25,11 +25,9 @@ run("To ROI Manager");
 roiManager("Select", findROIByName("roi_0_probe"));
 getSelectionCoordinates(x, y);
 
-// Read Magnification Factor from Calibration File
-factor = 0.990097;
-
-// Set Scale
-run("Set Scale...", "distance=1 known="+factor+" unit=um");
+// Set Magnification Factor from Calibration File
+//factor = 0.990097;
+//run("Set Scale...", "distance=1 known="+factor+" unit=um");
 
 // Define the focal point of the sequence.
 x1 = x[0];
@@ -51,8 +49,8 @@ for (i=0; i<totROIs; i++) {
 	// Overlay functions use bounding boxes
 	// https://imagej.nih.gov/ij/developer/macro/functions.html#Overlay
 
-    makeOval(x1 - r, y1 - r, r * 2, r * 2);
-    roiManager("Add");
+    //makeOval(x1 - r, y1 - r, r * 2, r * 2);
+    //roiManager("Add");
     makeOval(x2 - r, y2 - r, r * 2, r * 2);
     roiManager("Add");
     makeRotatedRectangle(x1, y1, x2, y2, r * 2);
@@ -60,7 +58,8 @@ for (i=0; i<totROIs; i++) {
 
     // Merge ROI
     count = roiManager("count");
-    currentSelection = newArray(count-3,count-2,count-1);
+    //currentSelection = newArray(count-3,count-2,count-1);
+	currentSelection = newArray(count-2,count-1);
 	roiManager("select", currentSelection);
 	roiManager("Combine");
 	roiManager("Add");
