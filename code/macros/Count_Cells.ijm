@@ -1,3 +1,28 @@
+print("Entering Count_Cells: " + getTitle());
+
+// Move ROIs from Overlay into ROI Manager
+run("To ROI Manager");
+
+totROIs = roiManager("count"); // Inclusive of Probe
+
+// Thresholding
+run("8-bit");
+setAutoThreshold("Default");
+
+for (i=1; i<totROIs-1; i++) {
+	currentSelection = findROIByName(".*(roi_"+i+").+");
+	roiManager("select", currentSelection);
+	// Background Subtraction
+	// Normalization
+	// Count Cells
+	run("Analyze Particles...", "size=40-3000 clear summarize");
+}
+
+print("Completed Count_Cells: " + getTitle());
+print("Exiting Count_Cells: " + getTitle()); 
+close("*");
+close("Roi Manager");
+
 function findROIByName(roiName) { 
 	nR = roiManager("Count"); 
  
@@ -10,29 +35,3 @@ function findROIByName(roiName) {
 	} 
 	return -1; 
 }
-
-function saveResults() { 
-	filePath = getDirectory("current");
-	imageTitle = getTitle();
-	getDateAndTime(year, month, week, day, hour, min, sec, msec);
-	
-	fileName = "/Results_" + imageTitle + "_" + day+month+year+"_"+hour+min+sec;
-	saveAs("Results", filePath + fileName + ".csv");
-}
-
-totROIs = roiManager("count"); // Inclusive of Probe
-
-// Thresholding
-run("8-bit");
-setAutoThreshold("Default");
-
-for (i=1; i<totROIs; i++) {
-	currentSelection = findROIByName("^(roi_"+i+").+");
-	roiManager("select", currentSelection);
-	// Background Subtraction
-	// Normalization
-	// Count Cells
-	run("Analyze Particles...", "size=40-3000 clear summarize");
-}
-
-//saveResults()
