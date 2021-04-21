@@ -1,46 +1,21 @@
-function findROIByName(roiName) { 
-	nR = roiManager("Count"); 
- 
-	for (i=0; i<nR; i++) { 
-		roiManager("Select", i); 
-		rName = Roi.getName(); 
-		if (matches(rName, roiName)) { 
-			return i; 
-		} 
-	} 
-	return -1; 
-}
-
-function saveResults() { 
-	filePath = getDirectory("current");
-	imageTitle = getTitle();
-	index = imageTitle.indexOf(".");
-	prefix = substring(imageTitle, 0, index);
-	getDateAndTime(year, month, week, day, hour, min, sec, msec);
-	
-	fileName = "/Results_" + prefix + "_" + day+month+year+"_"+hour+min+sec;
-	saveAs("Results", filePath + fileName + ".csv");
-}
-
-// Load Overlay
-run("Show Overlay");
+print("Entering Quantify_Fluorescence: " + getTitle());
 
 // Move ROIs from Overlay into ROI Manager
-//run("To ROI Manager");
+run("To ROI Manager");
 
 totROIs = roiManager("count"); // Inclusive of Probe & Background
 
 // Set Measurements
 run("Set Measurements...", "area mean standard display redirect=None decimal=3");
 
-currentSelection = findROIByName("^(roi_background)");
+currentSelection = findROIByName(".*roi_background.*");
 roiManager("select", currentSelection);
 roiManager("Measure");
 roiManager("Deselect");
 
 for (i=1; i<totROIs-1; i++) {
 	// Select current ROI
-	currentSelection = findROIByName("^(roi_"+i+").+");
+	currentSelection = findROIByName(".*roi_"+i+".+");
 	roiManager("select", currentSelection);
 	
 	// Background Subtraction (if required)
@@ -54,4 +29,20 @@ for (i=1; i<totROIs-1; i++) {
 	roiManager("Deselect");
 }
 
-//saveResults();
+print("Completed Quantify_Fluorescence: " + getTitle());
+print("Exiting Quantify_Fluorescence: " + getTitle()); 
+close("*");
+close("Roi Manager");
+
+function findROIByName(roiName) { 
+	nR = roiManager("Count"); 
+ 
+	for (i=0; i<nR; i++) { 
+		roiManager("Select", i); 
+		rName = Roi.getName(); 
+		if (matches(rName, roiName)) { 
+			return i; 
+		} 
+	} 
+	return -1; 
+}
