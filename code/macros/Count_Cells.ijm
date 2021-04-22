@@ -9,19 +9,21 @@ totROIs = roiManager("count"); // Inclusive of Probe
 run("8-bit");
 setAutoThreshold("Default");
 
+currentSelection = findROIByName(".*roi_background.*");
+roiManager("select", currentSelection);
+run("Analyze Particles...", "size=40-3000 clear summarize");
+roiManager("Deselect");
+
 for (i=1; i<totROIs-1; i++) {
 	currentSelection = findROIByName(".*(roi_"+i+").+");
 	roiManager("select", currentSelection);
-	// Background Subtraction
-	// Normalization
-	// Count Cells
-	run("Analyze Particles...", "size=40-3000 clear summarize");
+	run("Analyze Particles...", "size=30-230 clear summarize");
 }
 
 print("Completed Count_Cells: " + getTitle());
 print("Exiting Count_Cells: " + getTitle()); 
-close("*");
-close("Roi Manager");
+//close("*");
+//close("Roi Manager");
 
 function findROIByName(roiName) { 
 	nR = roiManager("Count"); 
