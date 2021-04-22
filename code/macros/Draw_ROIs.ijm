@@ -1,4 +1,4 @@
-totROIs = 3 // # of concentric circles
+totROIs = 10 // # of concentric circles
 firstRadius = 50
 incRadius = 50 // radius step-size
 

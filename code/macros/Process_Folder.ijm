@@ -44,16 +44,14 @@ function processFile(input, output, file) {
 	print("Opening: " + file);
 	open(input + File.separator + file);
 
-	print("Invoke Quantify_Fluorescence: " + file);
-	runMacro(macros + File.separator + "Quantify_Fluorescence.ijm");
-
-	/*
 	if(!file.contains("Nissl")) {
 		print("Invoke Quantify_Fluorescence: " + file);
 		runMacro(macros + File.separator + "Quantify_Fluorescence.ijm");
-	} else {
-		print("Invoke Count_Cells: " + file);
-		runMacro(macros + File.separator + "Count_Cells.ijm");
+	} 
+	else {
+		//print("Invoke Count_Cells: " + file);
+		//runMacro(macros + File.separator + "Count_Cells.ijm");
+		close("*");
 	}
-	*/
+	
 }
