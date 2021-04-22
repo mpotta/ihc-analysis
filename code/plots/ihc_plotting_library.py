@@ -3,6 +3,7 @@ import statistics
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
+import utility
 
 # Define Regex Constants
 regex_GFAP = ".*GFAP.*roi_[0-9]+.*"
@@ -57,6 +58,8 @@ def plot_intensity_profile(marker, x, y, background):
   plt.ylabel('Normalized Fluorescent Intensity')
   plt.title(marker)
   plt.show()
+  #if utility.get_config_parameter('SAVE_PLOTS'):
+  #  plt.savefig()
 
 def plot_cell_count_profile(marker, x, y, background):
   # Extract Distance from Implant
