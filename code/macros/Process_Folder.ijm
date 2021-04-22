@@ -15,7 +15,7 @@ function saveResults(outputPath) {
 	prefix = substring(input, index+1, input.length);
 	getDateAndTime(year, month, week, day, hour, min, sec, msec);
 	
-	fileName = "/Results_" + prefix + "_" + day+month+year;
+	fileName = "/Fluorescence_Results_" + prefix + "_" + day+month+year;
 	saveAs("Results", output + File.separator + fileName + ".csv");
 	print("Results Saved: " + fileName);
 }
