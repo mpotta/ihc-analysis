@@ -1,7 +1,7 @@
 print("Entering Count_Cells: " + getTitle());
 
 // Move ROIs from Overlay into ROI Manager
-run("To ROI Manager");
+//run("To ROI Manager");
 
 totROIs = roiManager("count"); // Inclusive of Probe
 
@@ -11,13 +11,13 @@ setAutoThreshold("Default");
 
 currentSelection = findROIByName(".*roi_background.*");
 roiManager("select", currentSelection);
-run("Analyze Particles...", "size=40-3000 clear summarize");
+run("Analyze Particles...", "size=30-300 clear summarize");
 roiManager("Deselect");
 
 for (i=1; i<totROIs-1; i++) {
 	currentSelection = findROIByName(".*(roi_"+i+").+");
 	roiManager("select", currentSelection);
-	run("Analyze Particles...", "size=30-230 clear summarize");
+	run("Analyze Particles...", "size=30-300 clear summarize");
 }
 
 print("Completed Count_Cells: " + getTitle());

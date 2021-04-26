@@ -58,8 +58,8 @@ def plot_intensity_profile(marker, x, y, background):
   plt.ylabel('Normalized Fluorescent Intensity')
   plt.title(marker)
   plt.show()
-  #if utility.get_config_parameter('SAVE_PLOTS'):
-  #  plt.savefig()
+  if utility.get_config_parameter('SAVE_PLOTS'):
+    plt.savefig(utility.get_config_parameter('DIRECTORY').strip('\'') + "/Normalized_Fluorescent_Intensity_" + marker + ".png")
 
 def plot_cell_count_profile(marker, x, y, background):
   # Extract Distance from Implant
