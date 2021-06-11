@@ -24,9 +24,9 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 	1. ```input``` with the Input Folder Path
 	2. ```output``` with the Output Folder Path
 	3. ```macros``` with the Macro Library Path
-2. Provide ```ihc-analysis/code/macros/Process_Folder.ijm``` with 
-	3. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn.
-	4. ```factor``` with Magnification Factor if Calibration Metadat is available externally.
+2. Provide ```ihc-analysis/code/macros/Process_Folder.ijm``` with
+	1. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn.
+	2. ```factor``` with Magnification Factor if Calibration Metadata is available externally.
 3. Run ```ihc-analysis/code/macros/Process_Folder.ijm```
 
 ## Quantitative Analysis
