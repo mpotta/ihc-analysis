@@ -19,7 +19,7 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 ```roi_0_probe``` represents the Locus of Points characterizing Probe Insertion
 ```roi_background``` represents Brain Tissue hypothesized to be least impacted by Surgical Insult. Used for Normalization of Intensity Levels.
 
-### How to Use
+### How to Use Fluorescence Quantification
 1. Provide ```ihc-analysis/code/macros/Process_Folder.ijm``` with 
 	1. ```input``` with the Input Folder Path
 	2. ```output``` with the Output Folder Path
@@ -28,6 +28,10 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 	1. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn.
 	2. ```factor``` with Magnification Factor if Calibration Metadata is available externally.
 3. Run ```ihc-analysis/code/macros/Process_Folder.ijm```
+
+### How to Use Cell Counter
+1. Provide ```iihc-analysis/code/macros/Count_Cells.ijm``` with ```size``` with the Size Range. Default is set to ```30-300 μm²```.
+2. Open Image and run ```ihc-analysis/code/macros/Count_Cells.ijm```
 
 ## Quantitative Analysis
 
