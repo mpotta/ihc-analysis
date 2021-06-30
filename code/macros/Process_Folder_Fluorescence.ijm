@@ -8,6 +8,7 @@
 
 processFolder(input);
 saveResults(output + File.separator);
+//close("*");
 
 // function to save Results
 function saveResults(outputPath) { 
@@ -15,7 +16,7 @@ function saveResults(outputPath) {
 	prefix = substring(input, index+1, input.length);
 	getDateAndTime(year, month, week, day, hour, min, sec, msec);
 	
-	fileName = "/Fluorescence_Results_" + prefix + "_" + day+month+year;
+	fileName = "/ResultsFluorescence_" + prefix + "_" + day+month+year;
 	saveAs("Results", output + File.separator + fileName + ".csv");
 	print("Results Saved: " + fileName);
 }
@@ -35,23 +36,17 @@ function processFolder(input) {
 function processFile(input, output, file) {
 	// Do the processing here by adding your own code.
 	// Leave the print statements until things work, then remove them.
-	print("Opening: " + file);
-	open(input + File.separator + file);
+	if(!file.contains("Nissl") && !file.contains("Control")) {
+		print("Opening: " + file);
+		open(input + File.separator + file);
 	
-	print("Invoke Draw_ROIs: " + file);
-	runMacro(macros + File.separator + "Draw_ROIs.ijm");
+		print("Invoke Draw_ROIs: " + file);
+		runMacro(macros + File.separator + "Draw_ROIs.ijm");
 
-	print("Opening: " + file);
-	open(input + File.separator + file);
-
-	if(!file.contains("Nissl")) {
+		print("Opening: " + file);
+		open(input + File.separator + file);
+		
 		print("Invoke Quantify_Fluorescence: " + file);
 		runMacro(macros + File.separator + "Quantify_Fluorescence.ijm");
 	} 
-	else {
-		//print("Invoke Count_Cells: " + file);
-		//runMacro(macros + File.separator + "Count_Cells.ijm");
-		close("*");
-	}
-	
 }

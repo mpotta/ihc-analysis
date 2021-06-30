@@ -4,7 +4,7 @@ firstRadius = step
 
 print("Entering Draw_ROIs: " + getTitle());
 // Move Probe and Background ROIs from Overlay into ROI Manager
-run("To ROI Manager");
+//run("To ROI Manager");
 
 if(roiManager("Count") == 2) {
 	drawROIs();
