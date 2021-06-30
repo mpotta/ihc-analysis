@@ -26,7 +26,8 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 	3. ```macros``` with the Macro Library Path
 2. Provide ```ihc-analysis/code/macros/Process_Folder.ijm``` with
 	1. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn.
-	2. ```factor``` with Magnification Factor if Calibration Metadata is available externally.
+	2. ```step_size``` with the step-size used for drawing concentric ROIs
+	3. ```factor``` with Magnification Factor if Calibration Metadata is available externally.
 3. Run ```ihc-analysis/code/macros/Process_Folder.ijm```
 
 ### How to Use Cell Counter
@@ -44,7 +45,8 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 ### How to Use
 1. Provide the ```ihc-analysis/code/plots/ihc_config.cfg``` with
 	1. ```DIRECTORY``` with the Folder Path to the .csv files to be processed
-	2. ```SAVE_PLOTS``` with true to save generated plots
+	2. ```STEP_SIZE``` with the step-size used for drawing concentric ROIs
+	3. ```SAVE_PLOTS``` with true to save generated plots
 2. Run ```python ihc-analysis/code/plots/ihc_plotting.py```
 
 ## Appendix
