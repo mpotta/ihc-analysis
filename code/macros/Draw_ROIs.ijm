@@ -1,6 +1,6 @@
 totROIs = 10 // # of concentric circles
-firstRadius = 50
-incRadius = 50 // radius step-size
+step = 50 // radius step-size
+firstRadius = step
 
 print("Entering Draw_ROIs: " + getTitle());
 // Move Probe and Background ROIs from Overlay into ROI Manager
@@ -52,13 +52,13 @@ function drawROIs() {
 	// Draw the circles.
 	for (i=0; i<totROIs; i++) {
 		// Define the radius for the current circle
-		r = firstRadius + i*incRadius;
+		r = firstRadius + i*step_size;
 		
 		// Overlay functions use bounding boxes
 		// https://imagej.nih.gov/ij/developer/macro/functions.html#Overlay
 	
-	    //makeOval(x1 - r, y1 - r, r * 2, r * 2);
-	    //roiManager("Add");
+	    makeOval(x1 - r, y1 - r, r * 2, r * 2);
+	    roiManager("Add");
 	    makeOval(x2 - r, y2 - r, r * 2, r * 2);
 	    roiManager("Add");
 	    makeRotatedRectangle(x1, y1, x2, y2, r * 2);
@@ -66,8 +66,8 @@ function drawROIs() {
 	
 	    // Merge ROI
 	    count = roiManager("count");
-	    //currentSelection = newArray(count-3,count-2,count-1);
-		currentSelection = newArray(count-2,count-1);
+	    currentSelection = newArray(count-3,count-2,count-1);
+		//currentSelection = newArray(count-2,count-1);
 		roiManager("select", currentSelection);
 		roiManager("Combine");
 		roiManager("Add");
