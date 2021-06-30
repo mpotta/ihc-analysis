@@ -46,7 +46,6 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 1. Provide the ```ihc-analysis/code/plots/ihc_config.cfg``` with
 	1. ```DIRECTORY``` with the Folder Path to the .csv files to be processed
 	2. ```STEP``` with the step-size used for drawing concentric ROIs
-	3. ```SAVE_PLOTS``` with true to save generated plots
 2. Run ```python ihc-analysis/code/plots/ihc_plotting.py```
 
 ## Appendix
