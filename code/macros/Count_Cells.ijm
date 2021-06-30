@@ -1,7 +1,7 @@
 print("Entering Count_Cells: " + getTitle());
 
 // Move ROIs from Overlay into ROI Manager
-//run("To ROI Manager");
+run("To ROI Manager");
 
 totROIs = roiManager("count"); // Inclusive of Probe
 
@@ -22,8 +22,6 @@ for (i=1; i<totROIs-1; i++) {
 
 print("Completed Count_Cells: " + getTitle());
 print("Exiting Count_Cells: " + getTitle()); 
-//close("*");
-//close("Roi Manager");
 
 function findROIByName(roiName) { 
 	nR = roiManager("Count"); 

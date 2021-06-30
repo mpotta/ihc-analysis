@@ -25,6 +25,8 @@ regex_GFAP_background = ".*GFAP.*background.*"
 regex_IgG_background = ".*IgG.*background.*"
 regex_CD68_background = ".*CD68.*background.*"
 
+regex_Cell_Count_background = ".*control.*"
+
 #file_path = '/content/'+ <File_Name.csv>
 # Conventions: Results_mBYXX_Y_Z_<side>_<Marker>_DDMMYY_HHMMSS.csv
 #          XX: Animal Number
@@ -72,27 +74,34 @@ def plot_intensity_profile(marker, x, y, background):
   plt.show()
 
 def plot_cell_count_profile(filename, df):
-  step_size = int(utility.get_config_parameter('STEP'))
-
-  y = df['Count'].astype(float).values
-  x = range(step_size, step_size*(len(y)+1), step_size)
-  area = df['Total Area'].astype(float).values
-  y = y*(1/area)
-
-  # Plot
   # Remove the plot frame lines. They are unnecessary chartjunk.    
   ax = plt.axes()   
   ax.spines["top"].set_visible(False)    
   ax.spines["bottom"].set_visible(False)    
   ax.spines["right"].set_visible(False)    
-  ax.spines["left"].set_visible(False) 
+  ax.spines["left"].set_visible(False)   
 
-  plt.plot(x, y, 'o-', lw=2.5, color=tableau20[3])   
-
+  # Add X and Y Axis Labels
   plt.xlabel('Distance from Implant (um)', labelpad=20)
-  plt.xticks(x)
-  plt.ylabel('Normalized Cell Count', labelpad=20)
+  plt.ylabel('Percentage of Background (%)', labelpad=20)
 
+  # Plot
+  step_size = int(utility.get_config_parameter('STEP'))
+  background = df[df['Slice'].str.contains(regex_Cell_Count_background, flags=re.IGNORECASE)]
+  baseline = background['Count'].astype(float).values*(1/background['Total Area'].astype(float).values)
+  y = df['Count'].astype(float).values
+  x = range(step_size, step_size*(len(y)+1), step_size)
+  area = df['Total Area'].astype(float).values
+  y = y*(1/area)
+  y = y*100/baseline[0]
+  plt.plot(x, y, 'o-', lw=2.5, color=tableau20[3]) 
+
+  # Layout
+  plt.xticks(x)
+  plt.grid(linestyle="--", lw=0.5, color="black", alpha=0.3)
+  plt.tight_layout(pad=4)
+
+  # Text
   file_parts = filename.split('_')
   animal_id = file_parts[1]
   slide = file_parts[2]
@@ -104,14 +113,21 @@ def plot_cell_count_profile(filename, df):
     "\nSource Code: https://github.com/mpotta/ihc-analysis", fontsize=7) 
 
   plt.title("Percentage of Background Cell Count", fontstyle='italic')
-  plt.grid(linestyle="--", lw=0.5, color="black", alpha=0.3)
-  plt.tight_layout(pad=4)
-
   plt.show()
 
-  save_plot("NormalizedCellCount", filename)
-
 def plot_fluorescence_profile(filename, df):
+  # Remove the plot frame lines. They are unnecessary chartjunk.    
+  ax = plt.axes()   
+  ax.spines["top"].set_visible(False)    
+  ax.spines["bottom"].set_visible(False)    
+  ax.spines["right"].set_visible(False)    
+  ax.spines["left"].set_visible(False)  
+
+  # Add X and Y Axis Labels
+  plt.xlabel('Distance from Implant (um)', labelpad=20)
+  plt.ylabel('Normalized Fluorescence', labelpad=20)  
+
+  # Plot
   background_GFAP = df[df['Label'].str.contains(regex_GFAP_background, flags=re.IGNORECASE)]
   df_GFAP = df[df['Label'].str.contains(regex_GFAP, flags=re.IGNORECASE)]
   background_IgG = df[df['Label'].str.contains(regex_IgG_background, flags=re.IGNORECASE)]
@@ -119,21 +135,8 @@ def plot_fluorescence_profile(filename, df):
   background_CD68 = df[df['Label'].str.contains(regex_CD68_background, flags=re.IGNORECASE)]
   df_CD68 = df[df['Label'].str.contains(regex_CD68, flags=re.IGNORECASE)]
 
-  # Remove the plot frame lines. They are unnecessary chartjunk.    
-  ax = plt.axes()   
-  ax.spines["top"].set_visible(False)    
-  ax.spines["bottom"].set_visible(False)    
-  ax.spines["right"].set_visible(False)    
-  ax.spines["left"].set_visible(False)    
-    
-  # Ensure that the axis ticks only show up on the bottom and left of the plot.    
-  # Ticks on the right and top of the plot are generally unnecessary chartjunk.    
-  ax.get_xaxis().tick_bottom()    
-  ax.get_yaxis().tick_left()
-
   x = df_GFAP['Label'].apply(lambda x: x.rpartition('_')[2])
   y = df_GFAP['Mean'].astype(float)
-
   min = float(background_GFAP['Mean'][0])
   max = y.max()
   y = (y - min)/(max - min)
@@ -141,47 +144,43 @@ def plot_fluorescence_profile(filename, df):
 
   x = df_IgG['Label'].apply(lambda x: x.rpartition('_')[2])
   y = df_IgG['Mean'].astype(float)
-
   min = float(background_IgG['Mean'][0])
   max = y.max()
   y = (y - min)/(max - min)
-
   plt.plot(x, y, 'o-', lw=2.5, color=tableau20[1], label="IgG")
 
   x = df_CD68['Label'].apply(lambda x: x.rpartition('_')[2])
   y = df_CD68['Mean'].astype(float)
-
   min = float(background_CD68['Mean'][0])
   max = y.max()
   y = (y - min)/(max - min)
-
   plt.plot(x, y, 'o-', lw=2.5, color=tableau20[2], label="CD68")
 
-  plt.xlabel('Distance from Implant (um)', labelpad=20)
-  plt.ylabel('Normalized Fluorescence', labelpad=20)
+  # Layout
+  plt.grid(linestyle="--", lw=0.5, color="black", alpha=0.3)
+  plt.tight_layout(pad=4)
 
+  # Legend
   for line, name in zip(ax.lines, ['GFAP', 'IgG', 'CD68']):
     y = line.get_ydata()[-1]
     ax.annotate(name, xy=(1,y), xytext=(6,0), color=line.get_color(), 
                 xycoords = ax.get_yaxis_transform(), textcoords="offset points",
                 size=10, va="center")
 
+  # Text
   file_parts = filename.split('_')
   animal_id = file_parts[1]
   slide = file_parts[2]
   slice = file_parts[3]
 
+# Note
   plt.gcf().text(0.02, 0.02,
     "\nSpecies: Mouse; ID: "+animal_id+"; Slide: "+slide[-1]+"; Slice: "+slice[-1]+""
     # "\nProbe: 20 um sharp tip tungsten wire; AP: -2.5 mm; ML: 1.5 mm; Hemisphere: Left"
     "\nSource Code: https://github.com/mpotta/ihc-analysis", fontsize=7) 
 
   plt.title("Normalized Fluorescence Intensity across Immune Markers", fontstyle='italic')
-  plt.grid(linestyle="--", lw=0.5, color="black", alpha=0.3)
-  plt.tight_layout(pad=4)
   plt.show()
-
-  save_plot("NormalizedFluorescence", filename)
 
 def plot_GFAP(df):
 
@@ -206,7 +205,3 @@ def plot_CD68(df):
 
   plot_intensity_scatter("CD68", df_CD68['Label'], df_CD68['Mean'], background_CD68['Mean'])
   plot_intensity_profile("CD68", df_CD68['Label'], df_CD68['Mean'], background_CD68['Mean'])
-
-def save_plot(name, marker):
-  if utility.get_config_parameter('SAVE_PLOTS'):
-    plt.savefig(utility.get_config_parameter('DIRECTORY').strip('\'') + "/"+ name +"_" + marker + ".png")
