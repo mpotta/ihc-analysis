@@ -100,7 +100,7 @@ def plot_cell_count_profile(filename, df):
 
   plt.gcf().text(0.02, 0.02,
     "\nSpecies: Mouse; ID: "+animal_id+"; Slide: "+slide[-1]+"; Slice: "+slice[-1]+""
-    "\nProbe: 20 um sharp tip tungsten wire; AP: -2.5 mm; ML: 1.5 mm; Hemisphere: Left"
+    #"\nProbe: 20 um sharp tip tungsten wire; AP: -2.5 mm; ML: 1.5 mm; Hemisphere: Left"
     "\nSource Code: https://github.com/mpotta/ihc-analysis", fontsize=7) 
 
   plt.title("Percentage of Background Cell Count", fontstyle='italic')
@@ -173,7 +173,7 @@ def plot_fluorescence_profile(filename, df):
 
   plt.gcf().text(0.02, 0.02,
     "\nSpecies: Mouse; ID: "+animal_id+"; Slide: "+slide[-1]+"; Slice: "+slice[-1]+""
-    "\nProbe: 20 um sharp tip tungsten wire; AP: -2.5 mm; ML: 1.5 mm; Hemisphere: Left"
+    # "\nProbe: 20 um sharp tip tungsten wire; AP: -2.5 mm; ML: 1.5 mm; Hemisphere: Left"
     "\nSource Code: https://github.com/mpotta/ihc-analysis", fontsize=7) 
 
   plt.title("Normalized Fluorescence Intensity across Immune Markers", fontstyle='italic')
