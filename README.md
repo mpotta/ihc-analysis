@@ -24,7 +24,7 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 1. Provide ```ihc-analysis/code/macros/Process_Folder_Fluorescence.ijm``` 
 	1. ```input``` with the Input Folder Path
 	2. ```output``` with the Output Folder Path
-	3. ```macros``` with the Macro Library Path
+	3. ```macros``` with the Macro Library Path if not installed
 2. Provide ```ihc-analysis/code/macros/Draw_ROIs.ijm``` with
 	1. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn
 	2. ```step``` with the step-size used for drawing concentric ROIs
@@ -36,7 +36,7 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 1. Provide ```ihc-analysis/code/macros/Process_Folder_Count_Cells.ijm``` 
 	1. ```input``` with the Input Folder Path
 	2. ```output``` with the Output Folder Path
-	3. ```macros``` with the Macro Library Path
+	3. ```macros``` with the Macro Library Path if not installed
 2. Provide ```ihc-analysis/code/macros/Count_Cells.ijm``` and ```ihc-analysis/code/macros/Count_Cells_Control.ijm```
 	1. ```size``` with the Size Range. Default is set to ```30-300 μm²```
 3. Run ```ihc-analysis/code/macros/Process_Folder_Count_Cells.ijm``` for each folder of the form ```mBY15_Slide2_Slice4```
