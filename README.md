@@ -2,6 +2,8 @@
 
 This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perform semi-automated quantification of 2D Fluorescent Microscopy Images.
 
+![](IHCAnalysisDemo.gif)
+
 ## Macro Library
 
 ### Install Macros
