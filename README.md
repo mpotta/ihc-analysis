@@ -11,7 +11,7 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
  3. Restart Fiji and the macro will now be an option in the _Plugins_ menu dropdown.
 
 ### Process Images
- 1. Place Images of Interest from the Same Animal, Slide and SLice in a folder.
+ 1. Place Images of Interest from the Same Animal, Slide and Slice in a folder of the form ```mBY15_Slide2_Slice4```
  2. Conform to the naming convention as 
 ```mBY15/raw_images/mBY15_Slide2_Slice4_11.5X_GFAP.tif``` for Image of Interest
 ```mBY15/raw_images/mBY15_Slide2_Slice4_11.5X_Control_GFAP.tif``` for Control (Healthy Tissue).
@@ -20,19 +20,24 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 ```roi_background``` represents Brain Tissue hypothesized to be least impacted by Surgical Insult. Used for Normalization of Intensity Levels.
 
 ### How to Use Fluorescence Quantification
-1. Provide ```ihc-analysis/code/macros/Process_Folder.ijm``` with 
+1. Provide ```ihc-analysis/code/macros/Process_Folder_Fluorescence.ijm``` 
 	1. ```input``` with the Input Folder Path
 	2. ```output``` with the Output Folder Path
 	3. ```macros``` with the Macro Library Path
-2. Provide ```ihc-analysis/code/macros/Process_Folder.ijm``` with
-	1. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn.
+2. Provide ```ihc-analysis/code/macros/Draw_ROIs.ijm``` with
+	1. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn
 	2. ```step``` with the step-size used for drawing concentric ROIs
-	3. ```factor``` with Magnification Factor if Calibration Metadata is available externally.
-3. Run ```ihc-analysis/code/macros/Process_Folder.ijm```
+	3. ```factor``` with Magnification Factor if Calibration Metadata is available externally
+3. Run ```ihc-analysis/code/macros/Process_Folder_Fluorescence.ijm``` for each folder of the form ```mBY15_Slide2_Slice4```
 
 ### How to Use Cell Counter
-1. Provide ```iihc-analysis/code/macros/Count_Cells.ijm``` with ```size``` with the Size Range. Default is set to ```30-300 μm²```.
-2. Open Image and run ```ihc-analysis/code/macros/Count_Cells.ijm```
+1. Provide ```ihc-analysis/code/macros/Process_Folder_Count_Cells.ijm``` 
+	1. ```input``` with the Input Folder Path
+	2. ```output``` with the Output Folder Path
+	3. ```macros``` with the Macro Library Path
+2. Provide ```ihc-analysis/code/macros/Count_Cells.ijm``` and ```ihc-analysis/code/macros/Count_Cells_Control.ijm```
+	1. ```size``` with the Size Range. Default is set to ```30-300 μm²```
+3. Run ```ihc-analysis/code/macros/Process_Folder_Count_Cells.ijm``` for each folder of the form ```mBY15_Slide2_Slice4```
 
 ## Quantitative Analysis
 
