@@ -18,6 +18,7 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 2. Import each Image into FIJI. Insert two Regions of Interest (ROIs) and save as Overlay.
 ```roi_0_probe``` represents the Locus of Points characterizing Probe Insertion
 ```roi_background``` represents Brain Tissue hypothesized to be least impacted by Surgical Insult. Used for Normalization of Intensity Levels.
+3. Apply Calibration to all Images by setting scale in FIJI -> Analyze Menu -> Set Scale
 
 ### How to Use Fluorescence Quantification
 1. Provide ```ihc-analysis/code/macros/Process_Folder_Fluorescence.ijm``` 
@@ -27,7 +28,7 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 2. Provide ```ihc-analysis/code/macros/Draw_ROIs.ijm``` with
 	1. ```totROIs``` with the number of concentric Regions of Interest (ROIs) to be drawn
 	2. ```step``` with the step-size used for drawing concentric ROIs
-	3. ```factor``` with Magnification Factor if Calibration Metadata is available externally
+	3. ```factor``` [Optional] with Magnification Factor if Calibration Metadata is available externally
 3. Run ```ihc-analysis/code/macros/Process_Folder_Fluorescence.ijm``` for each folder of the form ```mBY15_Slide2_Slice4```
 4. This will generate results file of the form ```ResultsFluorescence_mBY15_Slide2_Slice4_8056.csv``` in the Output path
 
