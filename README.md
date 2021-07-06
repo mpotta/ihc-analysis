@@ -2,6 +2,8 @@
 
 This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perform semi-automated quantification of 2D Fluorescent Microscopy Images.
 
+![](IHCAnalysisDemo.gif)
+
 ## Macro Library
 
 ### Install Macros
@@ -15,10 +17,13 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
  2. Conform to the naming convention as 
 ```mBY15/raw_images/mBY15_Slide2_Slice4_11.5X_GFAP.tif``` for Image of Interest
 ```mBY15/raw_images/mBY15_Slide2_Slice4_11.5X_Control_GFAP.tif``` for Control (Healthy Tissue).
-2. Import each Image into FIJI. Insert two Regions of Interest (ROIs) and save as Overlay.
-```roi_0_probe``` represents the Locus of Points characterizing Probe Insertion
-```roi_background``` represents Brain Tissue hypothesized to be least impacted by Surgical Insult. Used for Normalization of Intensity Levels.
-3. Apply Calibration to all Images by setting scale in FIJI -> Analyze Menu -> Set Scale
+2. For the Fluorescence markers, import each image into FIJI. Insert two Regions of Interest (ROIs) and save as Overlay.
+```roi_0_probe``` represents the Locus of Points characterizing probe insertion
+```roi_background``` represents brain tissue hypothesized to be least impacted by Surgical Insult. Used for Normalization of Intensity Levels.
+3. For the Cell Counter, import each experiment and control images into FIJI. Insert two Regions of Interest (ROIs) and save as Overlay.
+```roi_0_probe``` represents the Locus of Points characterizing probe insertion. Add only to the experiment image.
+```roi_background``` represents brain tissue in the healthy hemisphere. Add only to the control image.
+5. Apply Calibration to all Images by setting scale in FIJI -> Analyze Menu -> Set Scale
 
 ### How to Use Fluorescence Quantification
 1. Provide ```ihc-analysis/code/macros/Process_Folder_Fluorescence.ijm``` 
