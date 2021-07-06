@@ -43,7 +43,7 @@ This [FIJI](https://imagej.net/Fiji "Fiji") Macro Library allows a user to perfo
 	2. ```output``` with the Output Folder Path
 	3. ```macros``` with the Macro Library Path if not installed
 2. Provide ```ihc-analysis/code/macros/Count_Cells.ijm``` and ```ihc-analysis/code/macros/Count_Cells_Control.ijm```
-	1. ```size``` with the Size Range. Default is set to ```30-300 μm²```
+	1. ```size``` with the Size Range. Default is set to ```30-3000 μm²```
 3. Run ```ihc-analysis/code/macros/Process_Folder_Count_Cells.ijm``` for each folder of the form ```mBY15_Slide2_Slice4```
 4. This will generate results file of the form ```SummaryCellCount_mBY15_Slide2_Slice4_8056.csv``` in the Output path
 
