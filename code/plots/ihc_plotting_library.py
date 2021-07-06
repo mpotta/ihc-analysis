@@ -115,7 +115,7 @@ def plot_cell_count_profile(filename, df):
   plt.title("Percentage of Background Cell Count", fontstyle='italic')
   plt.show()
 
-def plot_fluorescence_profile(filename, df):
+def plot_norm_fluorescence_profile(filename, df):
   # Remove the plot frame lines. They are unnecessary chartjunk.    
   ax = plt.axes()   
   ax.spines["top"].set_visible(False)    
@@ -173,10 +173,80 @@ def plot_fluorescence_profile(filename, df):
   slide = file_parts[2]
   slice = file_parts[3]
 
-# Note
+  # Note
   plt.gcf().text(0.02, 0.02,
     "\nSpecies: Mouse; ID: "+animal_id+"; Slide: "+slide[-1]+"; Slice: "+slice[-1]+""
     # "\nProbe: 20 um sharp tip tungsten wire; AP: -2.5 mm; ML: 1.5 mm; Hemisphere: Left"
+    "\nSource Code: https://github.com/mpotta/ihc-analysis", fontsize=7) 
+
+  plt.title("Normalized Fluorescence Intensity across Immune Markers", fontstyle='italic')
+  plt.show()
+
+def plot_fluorescence_profile(filename, df):
+  # Remove the plot frame lines. They are unnecessary chartjunk.    
+  ax = plt.axes()   
+  ax.spines["top"].set_visible(False)    
+  ax.spines["bottom"].set_visible(False)    
+  ax.spines["right"].set_visible(False)    
+  ax.spines["left"].set_visible(False)  
+
+  # Add X and Y Axis Labels
+  plt.xlabel('Distance from Implant (um)', labelpad=20)
+  plt.ylabel('Normalized Fluorescence', labelpad=20)  
+
+  # Plot
+  background_GFAP = df[df['Label'].str.contains(regex_GFAP_background, flags=re.IGNORECASE)]
+  df_GFAP = df[df['Label'].str.contains(regex_GFAP, flags=re.IGNORECASE)]
+  background_IgG = df[df['Label'].str.contains(regex_IgG_background, flags=re.IGNORECASE)]
+  df_IgG = df[df['Label'].str.contains(regex_IgG, flags=re.IGNORECASE)]
+  background_CD68 = df[df['Label'].str.contains(regex_CD68_background, flags=re.IGNORECASE)]
+  df_CD68 = df[df['Label'].str.contains(regex_CD68, flags=re.IGNORECASE)]
+
+  x = df_GFAP['Label'].apply(lambda x: x.rpartition('_')[2])
+  y = df_GFAP['Mean'].astype(float)
+  min = float(background_GFAP['Mean'][0])
+  max = y.max()
+  # y = (y - min)/(max - min)
+  y = y*100/min
+  plt.plot(x, y, 'o-', lw=2.5, color=tableau20[0], label="GFAP")
+
+  x = df_IgG['Label'].apply(lambda x: x.rpartition('_')[2])
+  y = df_IgG['Mean'].astype(float)
+  min = float(background_IgG['Mean'][0])
+  max = y.max()
+  # y = (y - min)/(max - min)
+  y = y*100/min
+  plt.plot(x, y, 'o-', lw=2.5, color=tableau20[1], label="IgG")
+
+  x = df_CD68['Label'].apply(lambda x: x.rpartition('_')[2])
+  y = df_CD68['Mean'].astype(float)
+  min = float(background_CD68['Mean'][0])
+  max = y.max()
+  # y = (y - min)/(max - min)
+  y = y*100/min
+  plt.plot(x, y, 'o-', lw=2.5, color=tableau20[2], label="CD68")
+
+  # Layout
+  plt.grid(linestyle="--", lw=0.5, color="black", alpha=0.3)
+  plt.tight_layout(pad=4)
+
+  # Legend
+  # for line, name in zip(ax.lines, ['GFAP', 'IgG', 'CD68']):
+  #   y = line.get_ydata()[-1]
+  #   ax.annotate(name, xy=(1,y), xytext=(6,0), color=line.get_color(), 
+  #               xycoords = ax.get_yaxis_transform(), textcoords="offset points",
+  #               size=8, va="center")
+  plt.legend()
+
+  # Text
+  file_parts = filename.split('_')
+  animal_id = file_parts[1]
+  slide = file_parts[2]
+  slice = file_parts[3]
+
+  # Note
+  plt.gcf().text(0.02, 0.02,
+    "\nSpecies: Mouse; ID: "+animal_id+"; Slide: "+slide[-1]+"; Slice: "+slice[-1]+""
     "\nSource Code: https://github.com/mpotta/ihc-analysis", fontsize=7) 
 
   plt.title("Normalized Fluorescence Intensity across Immune Markers", fontstyle='italic')

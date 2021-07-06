@@ -11,7 +11,7 @@ setAutoThreshold("Default");
 
 currentSelection = findROIByName(".*roi_background.*");
 roiManager("select", currentSelection);
-run("Analyze Particles...", "size=30-300 clear summarize");
+run("Analyze Particles...", "size=30-3000 clear summarize");
 roiManager("Deselect");
 
 for (i=1; i<totROIs-1; i++) {

@@ -13,7 +13,7 @@ def main():
                 ihc.plot_fluorescence_profile(filename, df_fluorescence)
             if filename.startswith("Summary"):
                 df_cell_count = ihc.load_cell_count_data(os.path.join(input_directory_path, filename))
-                ihc.plot_cell_count_profile(filename, df_cell_count)
+                ihc.plot_cell_count_profile(filename,df_cell_count)
 
 if __name__ == "__main__":
     main()
